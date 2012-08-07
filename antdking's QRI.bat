@@ -110,18 +110,21 @@ cls
 color 09
 echo _______________________________________________________________________________
 echo.
-echo                           antdking's Recovery Flasher
+echo                           antdking's LG P350 Toolkit
 echo _______________________________________________________________________________
 ping localhost -n 2 >nul
 echo.
-echo welcome to antdking's easy recovery flasher
-echo this will guide you through choosing a recovery and 
-echo fixing common problems
+echo welcome to antdking's P350 Toolkit
+echo this will guide you through rooting your phone,  
+echo choosing a recovery and fixing common problems
+ping localhost -n 2 >nul
 echo please report any suggestions and problems you have
 echo to me
 timeout /t 10
 
 :start
+echo this tool relies heavily on adb
+ping localhost -n 2 >nul
 echo is your phone connected?
 set /p choice=y/n...
 if '%choice%'=='y' goto adbdevice
@@ -158,8 +161,8 @@ goto adbdevice2
 :adbdevice2
 echo does your device show up?
 set /p choice=y/n...
-if '%choice%'=='y' goto pushrec
-if '%choice%'=='Y' goto pushrec
+if '%choice%'=='y' goto choose
+if '%choice%'=='Y' goto choose
 if '%choice%'=='n' goto debug
 if '%choice%'=='N' goto debug
 if '%choice%'=='0' goto lastres
@@ -306,8 +309,8 @@ echo if it is now installed, go to device detect?
 set /p choice=y/n...
 if '%choice%'=='y' goto adbdevice
 if '%choice%'=='Y' goto adbdevice
-if '%choice%'=='n' exit
-if '%choice%'=='N' exit
+if '%choice%'=='n' echo you can not continue without drivers & ping localhost -n 2>nul & now exiting... & ping localhost -n 2 >nul & exit
+if '%choice%'=='N' echo you can not continue without drivers & ping localhost -n 2>nul & now exiting... & ping localhost -n 2 >nul & exit
 if '%choice%'=='0' goto lastres
 ECHO please use y or n
 ping localhost -n 2 >nul
@@ -336,25 +339,62 @@ ECHO please choose a number between 0 and 3
 ping localhost -n 2 >nul
 goto lastres
 
+:choose
+cls
+echo with first checks over we can now begin
+ping localhost -n 2 >nul
+echo what would you like to do today?
+goto choose2
+:choose2
+echo [1]root your phone
+echo [2]flash recovery onto your phone
+echo [3]unroot device (only for stock rom!)
+echo [X]Exit
+set /p choice=1/2/3/X...
+if '%choice%'=='1' goto root
+if '%choice%'=='2' goto recoveryinstaller
+if '%choice%'=='3' goto unroot
+if '%choice%'=='x' echo I am sorry you want to leave :( & ping localhost -n 2 >nul & exiting.. & ping localhost n 2 >nul & exit
+if '%choice%'=='X' echo I am sorry you want to leave :( & ping localhost -n 2 >nul & exiting.. & ping localhost n 2 >nul & exit
+Echo please choose an option listed above
+ping localhost -n 2 >nul
+goto choose2
+
+:recoveryinstaller
+cls
+echo loading...
+ping localhost -n 2 >nul
+cls
+echo welcome to antdking's recovery installer
+ping localhost -n 2 >nul
+echo this will guide you through choosing a recovery
+echo and installling
+pause
+goto pushrec
+
 :pushrec
 cls
 echo please choose a recovery you want to use
 echo [1] Drapalyuk's AmonRA 2.2.1
 echo [2] Keyur's ClockworkMod 5.0.2.8
 echo [3] Keyur's RZ Recovery
-echo [4] Vivek's CWM touch recovery 5.0.2.7
+echo [4] Vivek's CWM touch Recovery 5.0.2.7
 echo [5] Ron's ClockworkMod 6.0.1.0
+echo [6] Stock Recovery (only flash if you have stock android and do not
+echo want a custom recovery anymore)
 set /p choice=1-5...
 if '%choice%'=='1' goto drapamon
 if '%choice%'=='2' goto keyurcwm
 if '%choice%'=='3' goto keyurrz
 if '%choice%'=='4' goto vivekcwmt
 if '%choice%'=='5' goto roncwm
+if '%choice%'=='6' goto stockrec
 ECHO please choose a number between 1 and 5
 ping localhost -n 2 >nul
 goto pushrec
 
 :drapamon
+cls
 echo are you sure you want to download and install AmonRA 2.2.1?
 set /p choice=y/n...
 if '%choice%'=='y' goto drapamon2
@@ -366,6 +406,7 @@ ping localhost -n 2 >nul
 goto drapamon
 
 :drapamon2
+cls
 echo credit to drapalyuk for creating this recovery
 ping localhost -n 2 >nul
 cd dependancies
@@ -404,6 +445,7 @@ pause
 goto flashrec
 
 :keyurcwm
+cls
 echo are you sure you want to download and install ClockworkMod 5.0.2.8?
 set /p choice=y/n...
 if '%choice%'=='y' goto keyurcwm2
@@ -415,6 +457,7 @@ ping localhost -n 2 >nul
 goto keyurcwm
 
 :keyurcwm2
+cls
 echo credit to Keyur for creating this recovery
 ping localhost -n 2 >nul
 cd dependancies
@@ -453,6 +496,7 @@ pause
 goto flashrec
 
 :keyurrz
+cls
 echo are you sure you want to download and install RZ recovery?
 set /p choice=y/n...
 if '%choice%'=='y' goto keyurrz2
@@ -464,6 +508,7 @@ ping localhost -n 2 >nul
 goto keyurrz
 
 :keyurrz2
+cls
 echo credit to Keyur for creating this recovery
 ping localhost -n 2 >nul
 cd dependancies
@@ -502,6 +547,7 @@ pause
 goto flashrec
 
 :vivekcwmt
+cls
 echo are you sure you want to download and install ClockworkMod 5 touch?
 set /p choice=y/n...
 if '%choice%'=='y' goto vivekcwmt2
@@ -513,6 +559,7 @@ ping localhost -n 2 >nul
 goto vivekcwmt
 
 :vivekcwmt2
+cls
 echo credit to Vivek for creating this recovery
 ping localhost -n 2 >nul
 cd dependancies
@@ -551,6 +598,7 @@ pause
 goto flashrec
 
 :roncwm
+cls
 echo are you sure you want to download and install ClockworkMod 6?
 set /p choice=y/n...
 if '%choice%'=='y' goto roncwm2
@@ -562,6 +610,7 @@ ping localhost -n 2 >nul
 goto romcwm
 
 :roncwm2
+cls
 echo credit to Ron for creating this recovery
 ping localhost -n 2 >nul
 cd dependancies
@@ -599,8 +648,70 @@ echo press enter to begin process
 pause
 goto flashrec
 
-:flashrec
+:stockrec
+cls
+echo WARNING!
+echo this is only for those using stock android
+echo DO NOT FLASH THIS ON CUSTOM ROMS
+echo You will probably brick your phone
+ping localhost -n 2 >nul
+echo.
+echo this recovery can also only do factory resets
+echo you can not install custom roms with this
+echo you must still have root permissions to flash this
+echo do you wish to still install this recovery?
+set /p choice=y/n...
+if '%choice%'=='y' goto stockrec2
+if '%choice%'=='Y' goto stockrec2
+if '%choice%'=='n' goto pushrec
+if '%choice%'=='N' goto pushrec
+ECHO please use y or n
+ping localhost -n 2 >nul
+goto stockrec
+
+:stockrec2
+cls
+echo credit to LG for creating this recovery
+ping localhost -n 2 >nul
 cd dependancies
+if exist "recovery.img" del /q recovery.img
+cd..
+echo initialising wget...
+if not exist "recoveries\" mkdir recoveries
+cd recoveries
+if not exist "stockrec\" mkdir "stockrec"
+cd stockrec\
+if exist "*.*" del /Q *.*
+cd..
+cd..
+xcopy /Q %0\..\dependancies\wget.exe %0\..\recoveries\stockrec\ >nul
+xcopy /Q %0\..\dependancies\7za.exe %0\..\recoveries\stockrec\ >nul
+cd recoveries\stockrec\
+echo downloading...
+wget --output-document=stockrec.zip http://db.tt/pNHO1TX9
+cls
+echo extracting zip...
+ren *.zip recovery.zip
+7za e -y recovery.zip >nul
+echo zip extracted
+echo configuring extracted files...
+ren *.img recovery.img
+cd..
+cd..
+xcopy /Q %0\..\recoveries\stockrec\recovery.img %0\..\dependancies\
+cd recoveries\stockrec
+if exist "*.*" del /q *.*
+cd..
+cd..
+echo ready to flash stock recovery to your phone
+echo press enter to begin process
+pause
+goto flashrec
+
+:flashrec
+cls
+cd dependancies
+echo flashing recovery now...
 adb wait-for-device shell "su -c 'rm sdcard/recovery.img'"
 adb wait-for-device shell "su -c 'rm sdcard/flash_image'"
 adb wait-for-device push recovery.img /sdcard/
@@ -625,6 +736,135 @@ ping localhost -n 2 >nul
 echo exiting...
 ping localhost -n 3 >nul
 exit
+
+:root
+cls
+echo hello and welcome to my rooting tool
+ping localhost -n 2 >nul
+echo hopefully I can root your device without any problems
+ping localhost -n 2 >nul
+echo WARNING!
+echo rooting your device VOIDS your warranty
+echo do this at your own risk
+ping localhost -n 2 >nul
+echo press CTRL + C to close
+pause
+goto root2
+
+:root2
+cd dependancies
+adb devices
+echo editing config file
+adb wait-for-device shell "echo 1 > /data/local/lge_adb.conf"
+echo your device will now be rebooted
+echo hit enter to reboot
+pause
+echo after your device has rebooted, please enable usb debugging
+echo settings>applications>development
+adb reboot
+echo press enter after usb debugging is enabled
+pause
+adb devices
+echo pushing rooting script
+adb wait-for-device push root\psneuter /data/local/tmp
+echo running script
+adb shell "cd /data/local/tmp ; chmod 777 psneuter ; ./psneuter"
+echo script run. killing server
+adb kill-server
+ping localhost -n 2 >nul
+adb devices
+echo mounting system as re-writable
+adb wait-for-device shell "mount -o remount,rw -t rfs /dev/block/st19 /system"
+echo making root permanant
+ping localhost -n 2 >nul
+adb push root\busybox /system/bin
+adb push root\su /system/bin
+adb install root\Superuser.apk
+ping localhost -n 2 >nul
+adb shell "chmod 6755 /system/bin/busybox"
+adb shell "chmod 6755 /system/bin/su"
+adb shell "su -c /system/bin/busybox --install -s /system/bbin"
+adb shell "mount -o remount,ro -t rfs /dev/block/st19 /system"
+adb install root\RootCheckPro.apk
+echo device must reboot
+echo press enter to reboot
+pause
+adb reboot
+echo rebooting...
+eho press enter after enabling usb debugging
+cd..
+pause
+echo please open the app "root check pro" and verify root access
+ping localhost -n 2 >nul
+echo if your device isn't rooted please contact me and close this window
+ping localhost -n 2 >nul
+
+:recoption
+echo If you device is rooted, would you like to install a recovery?
+echo recoveries allow you to add tweaks, install custom roms
+echo and make backups
+set /p choice=y/n...
+if '%choice%'=='y' goto recoveryinstaller
+if '%choice%'=='Y' goto recoveryinstaller
+if '%choice%'=='n' echo I am sorry you want to leave :( & ping localhost -n 2 >nul & exiting.. & ping localhost n 2 >nul & exit
+if '%choice%'=='N' echo I am sorry you want to leave :( & ping localhost -n 2 >nul & exiting.. & ping localhost n 2 >nul & exit
+ECHO please use y or n
+ping localhost -n 2 >nul
+goto recoption
+
+:unroot
+cls
+echo hello and welcome to antdking's unrooting tool
+ping localhost -n 2 >nul
+echo unrooting your phone is only recommended on stock roms
+ping localhost -n 2 >nul
+echo if you unroot your phone that isn't on a stock rom and
+echo are unable to root your phone again, then that is your
+echo own fault
+ping localhost -n 2 >nul
+echo do you wish to continue?
+set /p choice=y/n...
+if '%choice%'=='y' goto unroot2
+if '%choice%'=='Y' goto unroot2
+if '%choice%'=='n' goto choose
+if '%choice%'=='N' goto choose
+ECHO please use y or n
+ping localhost -n 2 >nul
+goto unroot
+
+:unroot2
+cls
+echo please ensure that usb debugging is enabled
+pause
+echo unrooting device...
+cd dependancies
+adb devices
+echo uninstalling superuser...
+adb wait-for-device uninstall com.noshufou.android.su
+echo uninstalling superSU if installed before...
+adb wait-for-device uninstall eu.chainfire.supersu
+echo mounting system as rw...
+adb wait-for-devices shell "mount -o remount,rw -t rfs /dev/block/st19 /system"
+adb wait-for-device shell "cd /system/bin ; rm busybox ; rm su"
+adb wait-for-device shell "cd system/xbin ; rm busybox ; rm su"
+echo your device should now be unrooted
+echo rebooting your device...
+pause
+adb wait-for-device reboot
+echo to check your device is unrooted, try running any app that
+echo requires root access
+ping localhost -n 2 >nul
+echo do you wish to do anything else?
+set /p choice=y/n...
+if '%choice%'=='y' goto choose
+if '%choice%'=='Y' goto choose
+if '%choice%'=='n' echo I am sorry you want to leave :( & ping localhost -n 2 >nul & exiting.. & ping localhost n 2 >nul & exit
+if '%choice%'=='N' echo I am sorry you want to leave :( & ping localhost -n 2 >nul & exiting.. & ping localhost n 2 >nul & exit
+ECHO please use y or n
+ping localhost -n 2 >nul
+goto recoption
+
+
 
 
 
