@@ -854,6 +854,7 @@ adb wait-for-device reboot
 echo to check your device is unrooted, try running any app that
 echo requires root access
 ping localhost -n 2 >nul
+:anythingelse
 echo do you wish to do anything else?
 set /p choice=y/n...
 if '%choice%'=='y' goto choose
@@ -862,7 +863,7 @@ if '%choice%'=='n' echo I am sorry you want to leave :( & ping localhost -n 2 >n
 if '%choice%'=='N' echo I am sorry you want to leave :( & ping localhost -n 2 >nul & exiting.. & ping localhost n 2 >nul & exit
 ECHO please use y or n
 ping localhost -n 2 >nul
-goto recoption
+goto anythingelse
 
 
 
