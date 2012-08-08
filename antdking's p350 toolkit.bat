@@ -712,22 +712,22 @@ goto flashrec
 cls
 cd dependancies
 echo flashing recovery now...
-adb wait-for-device shell "su -c 'rm sdcard/recovery.img'"
-adb wait-for-device shell "su -c 'rm sdcard/flash_image'"
-adb wait-for-device push recovery.img /sdcard/
-adb wait-for-device push flash_image /sdcard/
-adb wait-for-device shell "su -c 'mount -o remount,rw -t yaffs2 /dev/block/mtdblock1 /system'"
-adb wait-for-device shell "su -c 'cat /sdcard/flash_image > /system/bin/flash_image'"
-adb wait-for-device shell "su -c 'chmod 755 /system/bin/flash_image'"
-adb wait-for-device shell "su -c 'sync'"
-adb wait-for-device shell "su -c 'flash_image recovery /sdcard/recovery.img'"
-adb wait-for-device shell "su -c 'sync'"
+adb -d wait-for-device shell "su -c 'rm sdcard/recovery.img'"
+adb -d wait-for-device shell "su -c 'rm sdcard/flash_image'"
+adb -d wait-for-device push recovery.img /sdcard/
+adb -d wait-for-device push flash_image /sdcard/
+adb -d wait-for-device shell "su -c 'mount -o remount,rw -t yaffs2 /dev/block/mtdblock1 /system'"
+adb -d wait-for-device shell "su -c 'cat /sdcard/flash_image > /system/bin/flash_image'"
+adb -d wait-for-device shell "su -c 'chmod 755 /system/bin/flash_image'"
+adb -d wait-for-device shell "su -c 'sync'"
+adb -d wait-for-device shell "su -c 'flash_image recovery /sdcard/recovery.img'"
+adb -d wait-for-device shell "su -c 'sync'"
 
 echo flashing now finished. rebooting to recovery..
 echo press enter when ready to reboot
 pause
 echo rebooting...
-adb wait-for-device shell "su -c 'reboot recovery'"
+adb -d wait-for-device shell "su -c 'reboot recovery'"
 if exist "recovery.img" del /q recovery.img
 cd..
 echo your device has now rebooted
@@ -755,41 +755,41 @@ goto root2
 cd dependancies
 adb devices
 echo editing config file
-adb wait-for-device shell "echo 1 > /data/local/lge_adb.conf"
+adb -d wait-for-device shell "echo 1 > /data/local/lge_adb.conf"
 echo your device will now be rebooted
 echo hit enter to reboot
 pause
 echo after your device has rebooted, please enable usb debugging
 echo settings>applications>development
-adb reboot
+adb -d wait-for-device reboot
 echo press enter after usb debugging is enabled
 pause
 adb devices
 echo pushing rooting script
-adb wait-for-device push root\psneuter /data/local/tmp
+adb -d wait-for-device push root\psneuter /data/local/tmp
 echo running script
-adb shell "cd /data/local/tmp ; chmod 777 psneuter ; ./psneuter"
+adb -d wait-for-device shell "cd /data/local/tmp ; chmod 777 psneuter ; ./psneuter"
 echo script run. killing server
 adb kill-server
 ping localhost -n 2 >nul
 adb devices
 echo mounting system as re-writable
-adb wait-for-device shell "mount -o remount,rw -t rfs /dev/block/st19 /system"
+adb -d wait-for-device shell "mount -o remount,rw -t rfs /dev/block/st19 /system"
 echo making root permanant
 ping localhost -n 2 >nul
-adb push root\busybox /system/bin
-adb push root\su /system/bin
-adb install root\Superuser.apk
+adb -d wait-for-device push root\busybox /system/bin
+adb -d wait-for-device push root\su /system/bin
+adb -d wait-for-device install root\Superuser.apk
 ping localhost -n 2 >nul
-adb shell "chmod 6755 /system/bin/busybox"
-adb shell "chmod 6755 /system/bin/su"
-adb shell "su -c /system/bin/busybox --install -s /system/bbin"
-adb shell "mount -o remount,ro -t rfs /dev/block/st19 /system"
-adb install root\RootCheckPro.apk
+adb -d wait-for-device shell "chmod 6755 /system/bin/busybox"
+adb -d wait-for-device shell "chmod 6755 /system/bin/su"
+adb -d wait-for-device shell "su -c /system/bin/busybox --install -s /system/bbin"
+adb -d wait-for-device shell "mount -o remount,ro -t rfs /dev/block/st19 /system"
+adb -d wait-for-device install root\RootCheckPro.apk
 echo device must reboot
 echo press enter to reboot
 pause
-adb reboot
+adb -d reboot
 echo rebooting...
 eho press enter after enabling usb debugging
 cd..
@@ -840,17 +840,17 @@ echo unrooting device...
 cd dependancies
 adb devices
 echo uninstalling superuser...
-adb wait-for-device uninstall com.noshufou.android.su
+adb -d wait-for-device uninstall com.noshufou.android.su
 echo uninstalling superSU if installed before...
-adb wait-for-device uninstall eu.chainfire.supersu
+adb -d wait-for-device uninstall eu.chainfire.supersu
 echo mounting system as rw...
-adb wait-for-devices shell "mount -o remount,rw -t rfs /dev/block/st19 /system"
-adb wait-for-device shell "cd /system/bin ; rm busybox ; rm su"
-adb wait-for-device shell "cd system/xbin ; rm busybox ; rm su"
+adb -d wait-for-devices shell "mount -o remount,rw -t rfs /dev/block/st19 /system"
+adb -d wait-for-device shell "cd /system/bin ; rm busybox ; rm su"
+adb -d wait-for-device shell "cd system/xbin ; rm busybox ; rm su"
 echo your device should now be unrooted
 echo rebooting your device...
 pause
-adb wait-for-device reboot
+adb -d wait-for-device reboot
 echo to check your device is unrooted, try running any app that
 echo requires root access
 ping localhost -n 2 >nul
