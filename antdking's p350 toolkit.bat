@@ -380,273 +380,81 @@ echo [2] Keyur's ClockworkMod 5.0.2.8
 echo [3] Keyur's RZ Recovery
 echo [4] Vivek's CWM touch Recovery 5.0.2.7
 echo [5] Ron's ClockworkMod 6.0.1.0
-echo [6] Stock Recovery (only flash if you have stock android and do not
+echo [6] Custom Recovery
+echo [7] Stock Recovery (only flash if you have stock android and do not
 echo want a custom recovery anymore)
-set /p choice=1-5...
+set /p choice=1-7...
 if '%choice%'=='1' goto drapamon
 if '%choice%'=='2' goto keyurcwm
 if '%choice%'=='3' goto keyurrz
 if '%choice%'=='4' goto vivekcwmt
 if '%choice%'=='5' goto roncwm
-if '%choice%'=='6' goto stockrec
-ECHO please choose a number between 1 and 5
+if '%choice%'=='6' goto custrec
+if '%choice%'=='7' goto stockrec
+ECHO please choose a number between 1 and 7
 ping localhost -n 2 >nul
 goto pushrec
 
 :drapamon
 cls
+echo credit to drapalyuk for creating this recovery
 echo are you sure you want to download and install AmonRA 2.2.1?
 set /p choice=y/n...
-if '%choice%'=='y' goto drapamon2
-if '%choice%'=='Y' goto drapamon2
+if '%choice%'=='y' set recovery=http://db.tt/pUPLPCrv & goto downloadrec
+if '%choice%'=='Y' set recovery=http://db.tt/pUPLPCrv & goto downloadrec
 if '%choice%'=='n' goto pushrec
 if '%choice%'=='N' goto pushrec
 ECHO please use y or n
 ping localhost -n 2 >nul
 goto drapamon
 
-:drapamon2
-cls
-echo credit to drapalyuk for creating this recovery
-ping localhost -n 2 >nul
-cd dependancies
-if exist "recovery.img" del /q recovery.img
-cd..
-echo initialising wget...
-if not exist "recoveries\" mkdir recoveries
-cd recoveries
-if not exist "amonra\" mkdir "amonra"
-cd amonra\
-if exist "*.*" del /Q *.*
-cd..
-cd..
-xcopy /Q %0\..\dependancies\wget.exe %0\..\recoveries\amonra\ >nul
-xcopy /Q %0\..\dependancies\7za.exe %0\..\recoveries\amonra\ >nul
-cd recoveries\amonra\
-echo downloading...
-wget --output-document=amonra.zip http://db.tt/pUPLPCrv
-cls
-echo extracting zip...
-ren *.zip recovery.zip
-7za e -y recovery.zip >nul
-echo zip extracted
-echo configuring extracted files...
-ren *.img recovery.img
-cd..
-cd..
-xcopy /Q %0\..\recoveries\amonra\recovery.img %0\..\dependancies\
-cd recoveries\amonra
-if exist "*.*" del /q *.*
-cd..
-cd..
-echo ready to flash Amonra to your phone
-echo press enter to begin process
-pause
-goto flashrec
-
 :keyurcwm
 cls
 echo are you sure you want to download and install ClockworkMod 5.0.2.8?
 set /p choice=y/n...
-if '%choice%'=='y' goto keyurcwm2
-if '%choice%'=='Y' goto keyurcwm2
+if '%choice%'=='y' set recovery=http://db.tt/wKJ78iXr & goto downloadrec
+if '%choice%'=='Y' set recovery=http://db.tt/wKJ78iXr & goto downloadrec
 if '%choice%'=='n' goto pushrec
 if '%choice%'=='N' goto pushrec
 ECHO please use y or n
 ping localhost -n 2 >nul
 goto keyurcwm
 
-:keyurcwm2
-cls
-echo credit to Keyur for creating this recovery
-ping localhost -n 2 >nul
-cd dependancies
-if exist "recovery.img" del /q recovery.img
-cd..
-echo initialising wget...
-if not exist "recoveries\" mkdir recoveries
-cd recoveries
-if not exist "keyurcwm\" mkdir "keyurcwm"
-cd keyurcwm\
-if exist "*.*" del /Q *.*
-cd..
-cd..
-xcopy /Q %0\..\dependancies\wget.exe %0\..\recoveries\keyurcwm\ >nul
-xcopy /Q %0\..\dependancies\7za.exe %0\..\recoveries\keyurcwm\ >nul
-cd recoveries\keyurcwm\
-echo downloading...
-wget --output-document=keyurcwm.zip http://db.tt/wKJ78iXr
-cls
-echo extracting zip...
-ren *.zip recovery.zip
-7za e -y recovery.zip >nul
-echo zip extracted
-echo configuring extracted files...
-ren *.img recovery.img
-cd..
-cd..
-xcopy /Q %0\..\recoveries\keyurcwm\recovery.img %0\..\dependancies\
-cd recoveries\keyurcwm
-if exist "*.*" del /q *.*
-cd..
-cd..
-echo ready to flash ClockworkMod to your phone
-echo press enter to begin process
-pause
-goto flashrec
-
 :keyurrz
 cls
 echo are you sure you want to download and install RZ recovery?
 set /p choice=y/n...
-if '%choice%'=='y' goto keyurrz2
-if '%choice%'=='Y' goto keyurrz2
+if '%choice%'=='y' set recovery=http://db.tt/iydRzmde & goto downloadrec
+if '%choice%'=='Y' set recovery=http://db.tt/iydRzmde & goto downloadrec
 if '%choice%'=='n' goto pushrec
 if '%choice%'=='N' goto pushrec
 ECHO please use y or n
 ping localhost -n 2 >nul
 goto keyurrz
 
-:keyurrz2
-cls
-echo credit to Keyur for creating this recovery
-ping localhost -n 2 >nul
-cd dependancies
-if exist "recovery.img" del /q recovery.img
-cd..
-echo initialising wget...
-if not exist "recoveries\" mkdir recoveries
-cd recoveries
-if not exist "keyurrz\" mkdir "keyurrz"
-cd keyurrz\
-if exist "*.*" del /Q *.*
-cd..
-cd..
-xcopy /Q %0\..\dependancies\wget.exe %0\..\recoveries\keyurrz\ >nul
-xcopy /Q %0\..\dependancies\7za.exe %0\..\recoveries\keyurrz\ >nul
-cd recoveries\keyurrz\
-echo downloading...
-wget --output-document=keyurrz.zip http://db.tt/iydRzmde
-cls
-echo extracting zip...
-ren *.zip recovery.zip
-7za e -y recovery.zip >nul
-echo zip extracted
-echo configuring extracted files...
-ren *.img recovery.img
-cd..
-cd..
-xcopy /Q %0\..\recoveries\keyurrz\recovery.img %0\..\dependancies\
-cd recoveries\keyurrz
-if exist "*.*" del /q *.*
-cd..
-cd..
-echo ready to flash RZ recovery to your phone
-echo press enter to begin process
-pause
-goto flashrec
-
 :vivekcwmt
 cls
 echo are you sure you want to download and install ClockworkMod 5 touch?
 set /p choice=y/n...
-if '%choice%'=='y' goto vivekcwmt2
-if '%choice%'=='Y' goto vivekcwmt2
+if '%choice%'=='y' set recovery=http://db.tt/X8NNpwPt & goto downloadrec
+if '%choice%'=='Y' set recovery=http://db.tt/X8NNpwPt & goto downloadrec
 if '%choice%'=='n' goto pushrec
 if '%choice%'=='N' goto pushrec
 ECHO please use y or n
 ping localhost -n 2 >nul
 goto vivekcwmt
 
-:vivekcwmt2
-cls
-echo credit to Vivek for creating this recovery
-ping localhost -n 2 >nul
-cd dependancies
-if exist "recovery.img" del /q recovery.img
-cd..
-echo initialising wget...
-if not exist "recoveries\" mkdir recoveries
-cd recoveries
-if not exist "vivekcwmt\" mkdir "vivekcwmt"
-cd vivekcwmt\
-if exist "*.*" del /Q *.*
-cd..
-cd..
-xcopy /Q %0\..\dependancies\wget.exe %0\..\recoveries\vivekcwmt\ >nul
-xcopy /Q %0\..\dependancies\7za.exe %0\..\recoveries\vivekcwmt\ >nul
-cd recoveries\vivekcwmt\
-echo downloading...
-wget --output-document=vivekcwmt.zip http://db.tt/X8NNpwPt
-cls
-echo extracting zip...
-ren *.zip recovery.zip
-7za e -y recovery.zip >nul
-echo zip extracted
-echo configuring extracted files...
-ren *.img recovery.img
-cd..
-cd..
-xcopy /Q %0\..\recoveries\vivekcwmt\recovery.img %0\..\dependancies\
-cd recoveries\vivekcwmt
-if exist "*.*" del /q *.*
-cd..
-cd..
-echo ready to flash ClockworkMod touch to your phone
-echo press enter to begin process
-pause
-goto flashrec
-
 :roncwm
 cls
 echo are you sure you want to download and install ClockworkMod 6?
 set /p choice=y/n...
-if '%choice%'=='y' goto roncwm2
-if '%choice%'=='Y' goto roncwm2
+if '%choice%'=='y' set recovery=http://db.tt/ie5q24g2 & goto downloadrec
+if '%choice%'=='Y' set recovery=http://db.tt/ie5q24g2 & goto downloadrec
 if '%choice%'=='n' goto pushrec
 if '%choice%'=='N' goto pushrec
 ECHO please use y or n
 ping localhost -n 2 >nul
 goto romcwm
-
-:roncwm2
-cls
-echo credit to Ron for creating this recovery
-ping localhost -n 2 >nul
-cd dependancies
-if exist "recovery.img" del /q recovery.img
-cd..
-echo initialising wget...
-if not exist "recoveries\" mkdir recoveries
-cd recoveries
-if not exist "roncwm\" mkdir "roncwm"
-cd roncwm\
-if exist "*.*" del /Q *.*
-cd..
-cd..
-xcopy /Q %0\..\dependancies\wget.exe %0\..\recoveries\roncwm\ >nul
-xcopy /Q %0\..\dependancies\7za.exe %0\..\recoveries\roncwm\ >nul
-cd recoveries\roncwm\
-echo downloading...
-wget --output-document=roncwm.zip http://db.tt/ie5q24g2
-cls
-echo extracting zip...
-ren *.zip recovery.zip
-7za e -y recovery.zip >nul
-echo zip extracted
-echo configuring extracted files...
-ren *.img recovery.img
-cd..
-cd..
-xcopy /Q %0\..\recoveries\roncwm\recovery.img %0\..\dependancies\
-cd recoveries\roncwm
-if exist "*.*" del /q *.*
-cd..
-cd..
-echo ready to flash ClockworkMod 6 to your phone
-echo press enter to begin process
-pause
-goto flashrec
 
 :stockrec
 cls
@@ -661,52 +469,49 @@ echo you can not install custom roms with this
 echo you must still have root permissions to flash this
 echo do you wish to still install this recovery?
 set /p choice=y/n...
-if '%choice%'=='y' goto stockrec2
-if '%choice%'=='Y' goto stockrec2
+if '%choice%'=='y' set recovery=http://db.tt/pNHO1TX9 & goto downloadrec
+if '%choice%'=='Y' set recovery=http://db.tt/pNHO1TX9 & goto downloadrec
 if '%choice%'=='n' goto pushrec
 if '%choice%'=='N' goto pushrec
 ECHO please use y or n
 ping localhost -n 2 >nul
 goto stockrec
 
-:stockrec2
-cls
-echo credit to LG for creating this recovery
-ping localhost -n 2 >nul
+:downloadrec
 cd dependancies
-if exist "recovery.img" del /q recovery.img
-cd..
+echo clearing previous files...
+if exist "recovery.img" del /q *.img
+if exist "recovery.zip" del /q *.zip
 echo initialising wget...
-if not exist "recoveries\" mkdir recoveries
-cd recoveries
-if not exist "stockrec\" mkdir "stockrec"
-cd stockrec\
-if exist "*.*" del /Q *.*
-cd..
-cd..
-xcopy /Q %0\..\dependancies\wget.exe %0\..\recoveries\stockrec\ >nul
-xcopy /Q %0\..\dependancies\7za.exe %0\..\recoveries\stockrec\ >nul
-cd recoveries\stockrec\
-echo downloading...
-wget --output-document=stockrec.zip http://db.tt/pNHO1TX9
-cls
+wget --output-document=recovery.zip %recovery%
+if not exist "recovery.zip" echo the file was not downloaded. trying again... & cd.. & ping localhost -n 2 >nul & goto downloadrec
 echo extracting zip...
-ren *.zip recovery.zip
-7za e -y recovery.zip >nul
-echo zip extracted
-echo configuring extracted files...
+7za e -y recovery.zip *.img
 ren *.img recovery.img
 cd..
-cd..
-xcopy /Q %0\..\recoveries\stockrec\recovery.img %0\..\dependancies\
-cd recoveries\stockrec
-if exist "*.*" del /q *.*
-cd..
-cd..
-echo ready to flash stock recovery to your phone
-echo press enter to begin process
+if not exist "recovery.img" echo there was a problem in the download process. trying again... & cd.. & ping localhost -n 2 >nul & goto downloadrec
+echo ready to flash recovery
 pause
 goto flashrec
+
+:custrec
+cd dependancies
+if exist "recovery.img" del /q *.img
+if exist "recovery.zip" del /q *.zip
+echo please drag and drop the recovery image or zip you want to use onto this window
+echo (you can't do this on windows vista. instead, shift + right click -> copy path
+echo then paste into the window (right click -> paste))
+echo press enter afterwards
+set /p location=
+xcopy %location% %0\..\
+if exist "*.zip" echo extracting recovery out of zip & ren *.zip recovery.zip & 7za e -y recovery.zip *.img
+if exist "boot.img" echo detecting kernel. This is not a recovery. exiting... & ping localhost -n 2 >nul & goto choose2
+ren *img recovery.img
+if not exist "recovery.img" echo the file you provided did not contain an image. please try again... & cd.. & ping localhost -n 2 >nul & goto cutrec
+echo ready to flash recovery
+pause
+goto flashrec
+
 
 :flashrec
 cls
@@ -728,14 +533,15 @@ echo press enter when ready to reboot
 pause
 echo rebooting...
 adb -d wait-for-device shell "su -c 'reboot recovery'"
-if exist "recovery.img" del /q recovery.img
+if exist "recovery.img" del /q *.img
+if exist "recovery.zip" del /q *.zip
 cd..
 echo your device has now rebooted
 echo thank you for using antdking's recovery installer
 ping localhost -n 2 >nul
 echo exiting...
 ping localhost -n 3 >nul
-exit
+goto choose2
 
 :root
 cls
@@ -752,17 +558,18 @@ pause
 goto root2
 
 :root2
+cls
 cd dependancies
 adb devices
 echo editing config file
 adb -d wait-for-device shell "echo 1 > /data/local/lge_adb.conf"
 echo your device will now be rebooted
-echo hit enter to reboot
+echo hit any key to reboot
 pause
 echo after your device has rebooted, please enable usb debugging
 echo settings>applications>development
 adb -d wait-for-device reboot
-echo press enter after usb debugging is enabled
+echo press any key after you have enabled usb debugging
 pause
 adb devices
 echo pushing rooting script
@@ -783,15 +590,14 @@ adb -d wait-for-device install root\Superuser.apk
 ping localhost -n 2 >nul
 adb -d wait-for-device shell "chmod 6755 /system/bin/busybox"
 adb -d wait-for-device shell "chmod 6755 /system/bin/su"
-adb -d wait-for-device shell "su -c /system/bin/busybox --install -s /system/bbin"
 adb -d wait-for-device shell "mount -o remount,ro -t rfs /dev/block/st19 /system"
 adb -d wait-for-device install root\RootCheckPro.apk
 echo device must reboot
-echo press enter to reboot
+echo press any key to reboot
 pause
 adb -d reboot
 echo rebooting...
-eho press enter after enabling usb debugging
+echo press any key after reboot has finished
 cd..
 pause
 echo please open the app "root check pro" and verify root access
