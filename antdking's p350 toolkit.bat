@@ -488,8 +488,8 @@ if not exist "recovery.zip" echo the file was not downloaded. trying again... & 
 echo extracting zip...
 7za e -y recovery.zip *.img
 ren *.img recovery.img
-cd..
 if not exist "recovery.img" echo there was a problem in the download process. trying again... & cd.. & ping localhost -n 2 >nul & goto downloadrec
+cd..
 echo ready to flash recovery
 pause
 goto flashrec
