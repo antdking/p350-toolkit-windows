@@ -484,6 +484,7 @@ if exist "recovery.img" del /q *.img
 if exist "recovery.zip" del /q *.zip
 echo initialising wget...
 wget --output-document=recovery.zip %recovery%
+ren *.zip recovery.zip
 if not exist "recovery.zip" echo the file was not downloaded. trying again... & cd.. & ping localhost -n 2 >nul & goto downloadrec
 echo extracting zip...
 7za e -y recovery.zip *.img
